@@ -13,7 +13,19 @@ provider "azurerm" {
   }
 }
 
-resource "azurerm_resource_group" "FirstRG" {
-  name     = "SJ_08"
-  location = "Central India"
+resource "azurerm_resource_group" "sectest" {
+  name     = "sj10"
+  location = "West Europe"
+}
+
+resource "azurerm_storage_account" "sttest" {
+  name                     = "sanju19"
+  resource_group_name      = azurerm_resource_group.sectest.name
+  location                 = azurerm_resource_group.sectest.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = "staging"
+  }
 }
